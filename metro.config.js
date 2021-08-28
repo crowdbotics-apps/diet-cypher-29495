@@ -5,6 +5,7 @@
  * @format
  */
 
+const { getDefaultConfig } = require("metro-config")
 const path = require("path")
 const extraNodeModules = {
   "@modules": path.resolve(__dirname, "modules"),
@@ -16,24 +17,32 @@ const watchFolders = [
   path.resolve(__dirname, "screens"),
   path.resolve(__dirname, "options")
 ]
-module.exports = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: false
-      }
-    })
-  },
-  resolver: {
-    extraNodeModules: new Proxy(extraNodeModules, {
-      get: (target, name) =>
-        //redirects dependencies referenced from extraNodeModules to local node_modules
-        name in target
-          ? target[name]
-          : path.join(process.cwd(), "node_modules", name)
-    })
-  },
-  watchFolders,
-  resetCache: true
-}
+module.exports = (async () => {
+  const {
+    resolver: { sourceExts, assetExts }
+  } = await getDefaultConfig()
+  return {
+    transformer: {
+      babelTransformerPath: require.resolve("react-native-svg-transformer"),
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: false
+        }
+      })
+    },
+    resolver: {
+      assetExts: assetExts.filter(ext => ext !== "svg"),
+      sourceExts: [...sourceExts, "svg"],
+      extraNodeModules: new Proxy(extraNodeModules, {
+        get: (target, name) =>
+          //redirects dependencies referenced from extraNodeModules to local node_modules
+          name in target
+            ? target[name]
+            : path.join(process.cwd(), "node_modules", name)
+      })
+    },
+    watchFolders,
+    resetCache: true
+  }
+})()

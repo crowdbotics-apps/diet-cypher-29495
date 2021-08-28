@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>332781641404-gmnp8fnf3n5l30cv5mvndj9e6ajflo0e.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.332781641404-gmnp8fnf3n5l30cv5mvndj9e6ajflo0e</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>332781641404-vvaqip1k8meupjklqjmi5vrl4c3g7shc.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAO99tw5HKmPjGZx6e6IXXV3QVZ9C3u8FI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>332781641404</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.diet-cypher-29495</string>
+	<key>PROJECT_ID</key>
+	<string>diet-cypher</string>
+	<key>STORAGE_BUCKET</key>
+	<string>diet-cypher.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:332781641404:ios:ef3294aa046e8809737ab9</string>
+</dict>
+</plist>

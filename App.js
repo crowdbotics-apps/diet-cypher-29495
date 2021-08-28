@@ -8,14 +8,30 @@ import {
   createReducer,
   combineReducers
 } from "@reduxjs/toolkit"
+import AppLoading from "expo-app-loading"
 
 import { screens } from "@screens"
 import { hooks, slices, navigators, initialRoute } from "@modules"
 import { connectors } from "@store"
 
-const Stack = createStackNavigator()
-
 import { GlobalOptionsContext, OptionsContext, getOptions } from "@options"
+import { useFonts } from "expo-font"
+import {
+  Barlow_300Light,
+  Barlow_400Regular,
+  Barlow_500Medium,
+  Barlow_600SemiBold,
+  Barlow_700Bold
+} from "@expo-google-fonts/barlow"
+import {
+  SpaceGrotesk_300Light,
+  SpaceGrotesk_400Regular,
+  SpaceGrotesk_500Medium,
+  SpaceGrotesk_600SemiBold,
+  SpaceGrotesk_700Bold
+} from "@expo-google-fonts/space-grotesk"
+
+const Stack = createStackNavigator()
 
 const getNavigation = (modules, screens, initialRoute) => {
   const Navigation = () => {
@@ -33,7 +49,7 @@ const getNavigation = (modules, screens, initialRoute) => {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName={initialRoute}
-          screenOptions={ { headerShown: true } }
+          screenOptions={{ headerShown: false }}
         >
           {routes}
         </Stack.Navigator>
@@ -67,12 +83,24 @@ const App = () => {
   const global = useContext(GlobalOptionsContext)
   const Navigation = getNavigation(navigators, screens, initialRoute)
   const store = getStore([...slices, ...connectors], global)
-
+  const [fontsLoaded] = useFonts({
+    Barlow_300Light,
+    Barlow_400Regular,
+    Barlow_500Medium,
+    Barlow_600SemiBold,
+    Barlow_700Bold,
+    SpaceGrotesk_300Light,
+    SpaceGrotesk_400Regular,
+    SpaceGrotesk_500Medium,
+    SpaceGrotesk_600SemiBold,
+    SpaceGrotesk_700Bold,
+    FontAwesome: require("react-native-vector-icons/Fonts/FontAwesome.ttf")
+  })
   let effects = {}
   hooks.map(([_, hook]) => {
     effects[hook.name] = hook()
   })
-
+  if (!fontsLoaded) return <AppLoading />
   return (
     <Provider store={store}>
       <Navigation />

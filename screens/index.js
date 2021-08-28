@@ -1,3 +1,3 @@
-import * as mods from "glob:./**/index.js";
+import * as mods from "glob:./**/index.js"
 
-export const screens = Object.entries(mods);
+export const screens = Object.entries(mods)
